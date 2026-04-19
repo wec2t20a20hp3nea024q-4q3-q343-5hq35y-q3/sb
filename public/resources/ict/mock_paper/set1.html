@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HKDSE ICT 试卷二A 数据库 模拟试卷</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e2e6e9;
+            font-family: 'Times New Roman', Times, serif;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .paper {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 25px 30px 50px 30px;
+            margin: 0 auto;
+        }
+
+        /* 打印样式 */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .paper {
+                box-shadow: none;
+                padding: 0.5in;
+                max-width: 100%;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .no-break {
+                page-break-inside: avoid;
+            }
+            .answer-space, .diagram-placeholder {
+                border: 1px solid #aaa;
+                break-inside: avoid;
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .exam-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .subject {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 15px 0 5px;
+        }
+
+        .paper-code {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .time-info {
+            text-align: center;
+            font-size: 14px;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 6px 0;
+            margin: 15px 0;
+        }
+
+        .instructions {
+            font-size: 12px;
+            margin: 15px 0;
+            line-height: 1.4;
+            border-left: 3px solid #333;
+            padding-left: 15px;
+            background: #f9f9f9;
+        }
+
+        .question {
+            margin-top: 28px;
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+
+        .q-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-left: 5px solid #1e466e;
+        }
+
+        .subq {
+            margin: 18px 0 12px 20px;
+        }
+
+        .subq-letter {
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+
+        .marks {
+            font-weight: normal;
+            font-size: 14px;
+            color: #2c5282;
+            margin-left: 8px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 12px 0;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 8px 6px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #eef2f7;
+            font-weight: bold;
+        }
+
+        .example-data {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .code-block {
+            background: #f6f8fa;
+            border-left: 3px solid #0366d6;
+            padding: 8px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+        }
+
+        .answer-space {
+            border: 1px dashed #3b6e9e;
+            background: #fefce8;
+            min-height: 90px;
+            margin: 12px 0;
+            padding: 12px;
+            font-family: monospace;
+            color: #2d3748;
+        }
+
+        .diagram-placeholder {
+            border: 1px solid #2c3e50;
+            background: #faf9f6;
+            min-height: 180px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5a6e7c;
+            font-style: italic;
+        }
+
+        .field-desc {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .footer-note {
+            font-size: 11px;
+            margin-top: 30px;
+            text-align: center;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        .candidate-info {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .sql-keyword {
+            color: #0000aa;
+            font-weight: bold;
+        }
+        .underline-space {
+            display: inline-block;
+            min-width: 120px;
+            border-bottom: 1px solid #000;
+            margin: 0 5px;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+<div class="paper">
+    <!-- 抬头 模仿香港考试局风格 -->
+    <div style="text-align: right; font-size: 12px;">請在貼紙上填寫考生編號</div>
+    <div class="candidate-info">
+        <span>考生編號：<span style="border-bottom:1px solid #000; width:150px; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+        <span>座位編號：<span style="border-bottom:1px solid #000; width:100px; display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+    </div>
+    <h1>HONG KONG EXAMINATIONS AND ASSESSMENT AUTHORITY</h1>
+    <div class="exam-title">HONG KONG DIPLOMA OF SECONDARY EDUCATION EXAMINATION 2026</div>
+    <div class="subject">INFORMATION AND COMMUNICATION TECHNOLOGY</div>
+    <div class="paper-code">PAPER 2A – DATABASES</div>
+    <div class="time-info">11:15 am – 12:45 pm (1 hour 30 minutes)<br>This paper must be answered in English</div>
+
+    <div class="instructions">
+        <strong>INSTRUCTIONS</strong><br>
+        (1) Write your Candidate Number in the space provided on Page 1 and stick barcode labels in the spaces provided.<br>
+        (2) ANSWER ALL QUESTIONS. Write your answers in the spaces provided in this Question-Answer book. Do not write in the margins.<br>
+        (3) Supplementary answer sheets will be supplied on request.<br>
+        (4) The last page contains SQL commands and ER diagram symbols for reference.<br>
+        (5) This paper consists of FOUR questions. Answer ALL.
+    </div>
+
+    <!-- 问题1 -->
+    <div class="question">
+        <div class="q-title">1. E-Learning Platform Database</div>
+        <p>A company runs an online learning platform. The database uses three tables: <strong>COURSE, STUDENT, ENROLMENT</strong>. Part of the table structures are shown below.</p>
+        
+        <table>
+            <caption style="text-align:left; margin-bottom:5px; font-weight:bold;">COURSE</caption>
+            <tr><th>Field name</th><th>Type</th><th>Description</th><th>Example</th></tr>
+            <tr><td>CID</td><td>CHAR(5)</td><td>Course identity code</td><td>C1001</td></tr>
+            <tr><td>TITLE</td><td>VARCHAR(60)</td><td>Course title</td><td>Database Design</td></tr>
+            <tr><td>CREDITS</td><td>INT</td><td>Number of credits</td><td>3</td></tr>
+            <tr><td>FEE</td><td>DECIMAL(8,2)</td><td>Course fee (HKD)</td><td>1280.00</td></tr>
+            <tr><td>IID</td><td>CHAR(5)</td><td>Instructor ID</td><td>I0023</td></tr>
+        </table>
+        
+        <table>
+            <caption style="text-align:left; margin-bottom:5px; font-weight:bold;">STUDENT</caption>
+            <tr><th>Field name</th><th>Type</th><th>Description</th><th>Example</th></tr>
+            <tr><td>SID</td><td>CHAR(8)</td><td>Student identity code</td><td>S2001A</td></tr>
+            <tr><td>NAME</td><td>VARCHAR(50)</td><td>Student name</td><td>Chan Tai Man</td></tr>
+            <tr><td>EMAIL</td><td>VARCHAR(80)</td><td>Email address</td><td>tmchan@email.com</td></tr>
+            <tr><td>JOIN_DATE</td><td>DATE</td><td>Date of registration</td><td>2023-09-01</td></tr>
+        </table>
+        
+        <table>
+            <caption style="text-align:left; margin-bottom:5px; font-weight:bold;">ENROLMENT</caption>
+            <tr><th>Field name</th><th>Type</th><th>Description</th><th>Example</th></tr>
+            <tr><td>SID</td><td>CHAR(8)</td><td>Student ID (FK)</td><td>S2001A</td></tr>
+            <tr><td>CID</td><td>CHAR(5)</td><td>Course ID (FK)</td><td>C1001</td></tr>
+            <tr><td>ENROL_DATE</td><td>DATE</td><td>Date of enrolment</td><td>2026-01-10</td></tr>
+            <tr><td>STATUS</td><td>CHAR(1)</td><td>'A'=active, 'C'=completed, 'D'=dropped</td><td>A</td></tr>
+            <tr><td>PAYMENT</td><td>DECIMAL(8,2)</td><td>Amount paid</td><td>1280.00</td></tr>
+        </table>
+        <p class="field-desc">Primary key of ENROLMENT: (SID, CID). Foreign keys: SID references STUDENT, CID references COURSE.</p>
+        
+        <div class="subq">
+            <span class="subq-letter">(a)</span> What is the primary key of COURSE? <span class="marks">(1 mark)</span>
+            <div class="answer-space" style="min-height: 40px;">_________________________________</div>
+        </div>
+        
+        <div class="subq">
+            <span class="subq-letter">(b)</span> Write an SQL statement to list the titles and fees of courses that have credits greater than 2, sorted by fee descending. <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        
+        <div class="subq">
+            <span class="subq-letter">(c)</span> List the names of students who have enrolled in at least one course but have not made any payment (PAYMENT = 0). <span class="marks">(3 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        
+        <div class="subq">
+            <span class="subq-letter">(d)</span> The company wants to give a 10% discount on course fees for students who joined the platform before 2024. Write an UPDATE command to increase the discount? Actually to apply a loyalty bonus: add 50 credits to a new column "LOYALTY_POINTS" but we need to alter? Simpler: Write an SQL command to update the payment of enrolments for those students who joined before 2024, setting PAYMENT = PAYMENT * 0.9 (assuming full fee already recorded). <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        
+        <div class="subq">
+            <span class="subq-letter">(e)</span> The database designer decides to add an index on the field JOIN_DATE of STUDENT. Explain how this index can improve the performance of the query in part (d). <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+    </div>
+    
+    <!-- 问题2：规范化 + ER图设计 -->
+    <div class="question page-break">
+        <div class="q-title">2. Database Design & Normalisation</div>
+        <p>ABC Music School stores information about students, music lessons, and instructors. Currently they use one single table called <strong>MUSIC_ENROL</strong>:</p>
+        <table>
+            <tr><th>LessonID</th><th>LessonName</th><th>InstructorID</th><th>InstructorName</th><th>StudentID</th><th>StudentName</th><th>LessonDate</th><th>Fee</th></tr>
+            <tr><td>L01</td><td>Piano Beginner</td><td>I101</td><td>Mary Wong</td><td>S001</td><td>John Li</td><td>2026-03-10</td><td>350</td></tr>
+            <tr><td>L01</td><td>Piano Beginner</td><td>I101</td><td>Mary Wong</td><td>S002</td><td>Susan Chan</td><td>2026-03-10</td><td>350</td></tr>
+            <tr><td>L02</td><td>Guitar Advanced</td><td>I203</td><td>Tommy Kwan</td><td>S001</td><td>John Li</td><td>2026-03-12</td><td>450</td></tr>
+        </table>
+        <p class="field-desc">(Note: A lesson can have many students; a student can enrol in many lessons. Instructor is assigned per lesson.)</p>
+        <div class="subq">
+            <span class="subq-letter">(a)</span> Identify TWO data redundancy problems in the MUSIC_ENROL table. <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(b)</span> Normalise the above table into Third Normal Form (3NF). Write the final database schema, indicating primary keys and foreign keys. <span class="marks">(5 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(c)</span> Draw an Entity-Relationship diagram (crow’s foot notation) for your 3NF design. Attributes are NOT required, but you must show entities, relationships, cardinalities and participation constraints (mandatory/optional). <span class="marks">(4 marks)</span>
+            <div class="diagram-placeholder">ER Diagram (draw your answer in this space)</div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(d)</span> The school decides to store the total number of students enrolled for each lesson. Would you store this as a derived attribute? Give ONE advantage and ONE disadvantage of storing it. <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+    </div>
+    
+    <!-- 问题3：SQL聚合，视图，数据挖掘及伦理 -->
+    <div class="question">
+        <div class="q-title">3. Data Analysis, Views, and Business Intelligence</div>
+        <p>Refer to the tables in QUESTION 1 (COURSE, STUDENT, ENROLMENT). The management wants to analyse revenue and student behaviours.</p>
+        <div class="subq">
+            <span class="subq-letter">(a)</span> Write an SQL statement to compute the total revenue (sum of PAYMENT) generated by each course, only for courses that have at least 3 enrolments. Show course ID and total revenue. <span class="marks">(3 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(b)</span> Create a view named <strong>ActiveStudents</strong> that contains student ID, name, and number of active enrolments (STATUS='A'). <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(c)</span> The company applies data mining techniques on enrolment data. Describe TWO ways data mining can help improve business, e.g., recommending courses or predicting dropouts. <span class="marks">(4 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(d)</span> Ethical considerations: The platform collects students' email addresses and learning progress. State TWO ethical principles that the company should follow when using personal data. <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(e)</span> The following SQL command is executed: <br>
+            <div class="code-block">SELECT SID, COUNT(*) FROM ENROLMENT GROUP BY SID HAVING COUNT(*) > ALL (SELECT AVG(CNT) FROM (SELECT COUNT(*) AS CNT FROM ENROLMENT GROUP BY SID) AS T);</div>
+            Explain the purpose of this command. <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+    </div>
+    
+    <!-- 问题4：数据库开发周期，CASE工具，迁移，索引 -->
+    <div class="question page-break">
+        <div class="q-title">4. Database Development Lifecycle & Management</div>
+        <p>An IT team is building a new Online Food Ordering System for a restaurant chain. The project involves several stages and personnel roles.</p>
+        <div class="subq">
+            <span class="subq-letter">(a)</span> Match the following stages with the appropriate deliverables. Write the letter in the table. <span class="marks">(3 marks)</span>
+            <table style="width:80%">
+                <tr><th>Stage</th><th>Deliverable (choose from: User Manual, ER Diagram, Test Report, Data Dictionary, Prototype)</th></tr>
+                <tr><td>Requirements collection</td><td><div class="answer-space" style="min-height:30px; margin:0;"></div></td></tr>
+                <tr><td>Application and database design</td><td><div class="answer-space" style="min-height:30px; margin:0;"></div></td></tr>
+                <tr><td>Testing</td><td><div class="answer-space" style="min-height:30px; margin:0;"></div></td></tr>
+            </table>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(b)</span> Name TWO Computer-Aided Software Engineering (CASE) tools and describe for which stage each is most useful. <span class="marks">(4 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(c)</span> During data migration from the old system, the team discovers that the old database used different data types and naming conventions. Give TWO problems that may arise and suggest a solution for each. <span class="marks">(4 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(d)</span> The restaurant manager wants to generate a daily report showing the total number of orders per hour. Which field in the ORDERS table should be indexed to speed up the report generation? Explain briefly. <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(e)</span> The team decides to implement a distributed database across three branches. Give ONE advantage and ONE disadvantage of this distributed design compared to a centralised database. <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+        <div class="subq">
+            <span class="subq-letter">(f)</span> Write an SQL statement to create a new table named <strong>ORDER_SUMMARY</strong> that stores OrderDate, total orders, and total revenue, grouped by date. Assume the ORDERS table has fields: OrderID, OrderDate, Amount. <span class="marks">(2 marks)</span>
+            <div class="answer-space"></div>
+        </div>
+    </div>
+    
+    <!-- 额外加分风格：提供SQL参考和ER符号 (模仿原卷最后一页) -->
+    <div class="footer-note page-break">
+        <strong>Reference: SQL Commands & ER Diagram Symbols</strong><br>
+        <div style="display: flex; justify-content: space-between; font-size: 11px; margin-top: 10px;">
+            <div style="width: 45%;">
+                <strong>SQL keywords</strong><br>
+                SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, FROM, WHERE, GROUP BY, HAVING, ORDER BY, JOIN, INNER JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN, UNION, EXISTS, ANY, ALL, IN, BETWEEN, LIKE, NULL, NOT NULL, PRIMARY KEY, FOREIGN KEY, INDEX, VIEW, DISTINCT, COUNT, SUM, AVG, MAX, MIN.
+            </div>
+            <div style="width: 45%;">
+                <strong>ER Diagram Symbols</strong><br>
+                Entity: □&nbsp;&nbsp; Relationship: ◇&nbsp;&nbsp; Attribute: ○<br>
+                One-to-Many: 1────<🐾, Many-to-Many: }────{<br>
+                Mandatory participation: |&nbsp;&nbsp; Optional participation: ○
+            </div>
+        </div>
+        <div style="margin-top: 20px; font-size: 10px;">END OF PAPER</div>
+    </div>
+    
+    <!-- 提示学生可以继续在答题纸上作答 -->
+    <div style="margin-top: 20px; border-top: 1px dotted #aaa; text-align: center; padding: 10px;">Answers written in the margins will not be marked.</div>
+</div>
+</body>
+</html>

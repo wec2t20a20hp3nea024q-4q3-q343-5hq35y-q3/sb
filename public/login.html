@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Static Judge</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    .auth-container {
+      max-width: 420px;
+      margin: 60px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 32px;
+    }
+    .auth-container h2 {
+      margin-bottom: 24px;
+      color: #1e293b;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #2c3e50;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #2c7cb6;
+      box-shadow: 0 0 0 3px rgba(44,124,182,0.2);
+    }
+    .btn-primary {
+      width: 100%;
+      background-color: #1e466e;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover {
+      background-color: #0f2c46;
+    }
+    .auth-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.9rem;
+    }
+    .auth-footer a {
+      color: #2c7cb6;
+      text-decoration: none;
+    }
+    .error-message {
+      background: #fee2e2;
+      color: #b91c1c;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body class="app">
+  <div class="app-wrapper">
+    <header class="top-bar">
+      <div class="top-bar__left">
+        <a href="index.html" class="top-bar__brand">Static Judge</a>
+      </div>
+      <div class="top-bar__right">
+        <div class="top-bar__clock" id="liveClock">--:--:--</div>
+      </div>
+    </header>
+    <div class="layout">
+      <main class="main-content" style="display: flex; justify-content: center; align-items: center;">
+        <div class="auth-container">
+          <h2>Login to your account</h2>
+          <div id="errorBox" class="error-message"></div>
+          <form id="loginForm">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" id="username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" id="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn-primary">Log In</button>
+          </form>
+          <div class="auth-footer">
+            Don't have an account? <a href="register.html">Register here</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    // Live clock (reuse from script.js but we need it here too)
+    function updateClock() {
+      const clockEl = document.getElementById('liveClock');
+      if (!clockEl) return;
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+      clockEl.textContent = `${hh}:${mm}:${ss}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Login form handler
+    const form = document.getElementById('loginForm');
+    const errorBox = document.getElementById('errorBox');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBox.style.display = 'none';
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || 'Login failed');
+        }
+        if (data.success) {
+          window.location.href = data.redirect;
+        }
+      } catch (err) {
+        errorBox.textContent = err.message;
+        errorBox.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

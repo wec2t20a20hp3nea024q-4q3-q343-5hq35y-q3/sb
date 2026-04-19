@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Dashboard | Static Judge</title>
+  <link rel="stylesheet" href="./styles.css">
+  <!-- Font Awesome 4.7 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="app">
+  <div class="app-wrapper">
+    <!-- Top Navigation Bar -->
+    <header class="top-bar">
+      <div class="top-bar__left">
+        <button class="top-bar__toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar">
+          <i class="fa fa-bars"></i>
+        </button>
+        <a href="index.html" class="top-bar__brand">Static Judge</a>
+      </div>
+      <div class="top-bar__right">
+        <div class="user-area" id="userArea">
+          <!-- dynamic content: either username + dropdown, or Login/Register links -->
+        </div>
+        <div class="top-bar__clock" id="liveClock">--:--:--</div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Sidebar (unchanged) -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__search">
+          <div class="search-group">
+            <input type="text" class="search-input" placeholder="Search...">
+            <button class="search-btn" disabled><i class="fa fa-search"></i></button>
+          </div>
+          <div class="search-results" style="display: none;">No results</div>
+        </div>
+        <nav class="sidebar__nav">
+          <ul class="sidebar__menu">
+            <li class="sidebar__item"><a href="./new_oj/index.html" class="sidebar__link" data-nav="dashboard"><i class="fa fa-dashboard fa-fw"></i>New OJ</a></li>
+            <li class="sidebar__item"><a href="./games/hrd/index.html" class="sidebar__link" data-nav="tasks"><i class="fa fa-bars fa-fw"></i>Games</a></li>
+            <li class="sidebar__item"><a href="./recite/index.html" class="sidebar__link" data-nav="submissions"><i class="fa fa-send-o fa-fw"></i>Recite</a></li>
+            <li class="sidebar__item"><a href="./pp/index.html" class="sidebar__link" data-nav="contests"><i class="fa fa-flag-o fa-fw"></i>Past Papers</a></li>
+            <li class="sidebar__item"><a href="index.html" class="sidebar__link" data-nav="leaderboard"><i class="fa fa-bar-chart fa-fw"></i>??</a></li>
+            <li class="sidebar__item"><a href="index.html" class="sidebar__link" data-nav="settings"><i class="fa fa-cog fa-fw"></i> Settings</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content (unchanged) -->
+      <main class="main-content">
+        <div class="content-header">
+          <h1 class="page-title">Dashboard</h1>
+        </div>
+        <div class="content-body">
+          <p>A server-based website...</p>
+          <hr>
+          <p><strong>ouououuooui</strong> Click <a href="folder/index.html">sb</a> in the sidebar to visit <code>you==sb</code>.</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

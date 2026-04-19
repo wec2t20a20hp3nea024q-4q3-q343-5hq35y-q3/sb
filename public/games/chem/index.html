@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Chem-salts and neutralization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="lab-container">
+        <header>
+            <h1>Salts</h1>
+        </header>
+
+        <div class="main-panel">
+            <div class="reactor">
+                <div class="card">
+                    <h3>Moles of ion in solute</h3>
+                    <div class="ion-grid">
+                        <div class="ion-group">
+                            <h4>Cation</h4>
+                            <div id="cationsList" class="ion-list"></div>
+                        </div>
+                        <div class="ion-group">
+                            <h4>Anion</h4>
+                            <div id="anionsList" class="ion-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Solids</h3>
+                    <div id="solidsList" class="precipitate-list"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Gas produced</h3>
+                    <div id="gasesList" class="gas-list"></div>
+                </div>
+            </div>
+
+            <div class="console">
+                <div class="card">
+                    <h3>Add 1 mol of salt</h3>
+                    <div class="salt-selector">
+                        <label>Cation</label>
+                        <select id="cationSelect"></select>
+                    </div>
+                    <div class="salt-selector">
+                        <label>Anion</label>
+                        <select id="anionSelect"></select>
+                    </div>
+                    <button id="addSaltBtn" class="btn-add">Add!</button>
+                    <button id="resetBtn" class="btn-reset">Clear</button>
+                </div>
+
+                <div class="card info">
+                    <h4>Revise Chem!</h4>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

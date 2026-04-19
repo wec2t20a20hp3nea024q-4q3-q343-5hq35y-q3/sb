@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "username": "root",
+    "email": "alice@example.com",
+    "password": "2F2GeN&&eiowf"
+  },
+  {
+    "id": 2,
+    "username": "guest",
+    "email": "bob@example.com",
+    "password": "wyk.edu.hk"
+  }
+]

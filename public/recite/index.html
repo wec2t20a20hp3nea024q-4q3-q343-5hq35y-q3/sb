@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recite Mode</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../account.js"></script>
+    <script>
+      if(!logged_on()){
+        window.location.replace("../login.html");
+      }
+    </script>
+</head>
+<body>
+    <!-- Header from main index.html -->
+    <header class="main-header">
+        <div class="header-logo"><a href="../index.html" style="text-decoration: none; color: inherit;">Testing</a></div>
+        <nav class="header-nav">
+            <a href="../index.html">Feature 1</a>
+            <a href="../page1.html">Feature 2</a>
+            <a href="../page2.html">Feature 3</a>
+            <a href="#"></a>
+        </nav>
+        <div class="clock">
+            <span class="clock-time"></span>
+        </div>
+        <div class="header-tool" style="display: flex; gap: 1rem; align-items: center;">
+            <a href="../profile/index.html" style="color:#1e3a5f; text-decoration: none;"><span id="currentUserDisplay"></span></a>
+            <a href="#" id="logoutBtn" style="color:#ff4e4e; text-decoration: none;">Logout</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="recite-container">
+        <!-- Left Sidebar (Filters) -->
+        <aside class="recite-sidebar">
+            <div class="sidebar-title">Filter</div>
+            
+            <div class="filter-group">
+                <label>Subject</label>
+                <select id="subjectFilter">
+                    <option value="all">All Subjects</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Topic</label>
+                <select id="topicFilter" disabled>
+                    <option value="all">All Topics</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Source</label>
+                <select id="sourceFilter" disabled>
+                    <option value="all">All Sources</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button id="startBtn" class="btn btn-primary" disabled>Start Reciting</button>
+                <button id="resetBtn" class="btn btn-secondary">Reset All</button>
+            </div>
+
+            <div class="stats-panel">
+                <h3>Statistics</h3>
+                <div class="stat-item">
+                    <span>Total Available:</span>
+                    <span id="totalCount">0</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="recite-main">
+            <div class="recite-header">
+                <h1>Recite Mode</h1>
+                <p id="currentParagraphMeta"></p>
+            </div>
+
+            <!-- List View (Before starting) -->
+            <div id="listView" class="view">
+                <div class="paragraph-list">
+                    <div id="paragraphListContainer"></div>
+                </div>
+            </div>
+
+            <!-- Recite View (During reciting) -->
+            <div id="reciteView" class="view hidden">
+                <div class="recite-progress">
+                    <span id="progressText">Progress: 0/0</span>
+                    <button id="backBtn" class="btn btn-small">Back to List</button>
+                </div>
+                
+                <div class="paragraph-display" id="paragraphDisplay">
+                    <div id="paragraphContent" class="paragraph-text"></div>
+                </div>
+
+                <div id="inputArea" class="input-area"></div>
+
+                <!-- Results View -->
+                <div id="resultsView" class="results-container hidden">
+                    <h2>Recitation Complete!</h2>
+                    <div class="accuracy-display">
+                        <div class="accuracy-score" id="accuracyScore"></div>
+                        <div class="accuracy-details" id="accuracyDetails"></div>
+                    </div>
+                    <div class="button-group">
+                        <button id="startAgainBtn" class="btn btn-primary">Recite Again</button>
+                        <button id="backToListBtn" class="btn btn-secondary">Back to List</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

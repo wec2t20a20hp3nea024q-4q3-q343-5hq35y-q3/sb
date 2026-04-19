@@ -1,0 +1,357 @@
+/* ---------- RESET & BASE ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+.app {
+  height: 100%;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- TOP BAR (readable classes) ---------- */
+.top-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 60px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  z-index: 100;
+}
+
+.top-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-bar__toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #2c3e50;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.top-bar__toggle-btn:hover {
+  background-color: #eef2f5;
+}
+
+.top-bar__brand {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1e466e;
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+
+.top-bar__brand:hover {
+  color: #0f2c46;
+}
+
+.top-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.top-bar__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #2c3e50;
+}
+
+.top-bar__clock {
+  font-family: monospace;
+  font-size: 1rem;
+  background-color: #f0f2f5;
+  padding: 6px 12px;
+  border-radius: 24px;
+  font-weight: 500;
+}
+
+/* ---------- LAYOUT (sidebar + main) ---------- */
+.layout {
+  display: flex;
+  flex: 1;
+}
+
+/* ---------- SIDEBAR (dark, readable) ---------- */
+.sidebar {
+  width: 260px;
+  background-color: #1e2a36;
+  color: #e2e8f0;
+  transition: width 0.25s ease, visibility 0.2s;
+  overflow-x: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar--collapsed {
+  width: 0;
+  visibility: hidden;
+  min-width: 0;
+}
+
+.sidebar__search {
+  padding: 20px 16px;
+  border-bottom: 1px solid #2d3e4d;
+}
+
+.search-group {
+  display: flex;
+  background-color: #2d3e4d;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  outline: none;
+  font-size: 0.85rem;
+}
+
+.search-input::placeholder {
+  color: #a0b3c4;
+}
+
+.search-btn {
+  background: #2d3e4d;
+  border: none;
+  padding: 0 12px;
+  color: #cbd5e1;
+  cursor: default;
+}
+
+.search-results {
+  font-size: 0.8rem;
+  margin-top: 8px;
+  color: #b9c7d4;
+}
+
+.sidebar__nav {
+  flex: 1;
+}
+
+.sidebar__menu {
+  list-style: none;
+  padding: 12px 0;
+}
+
+.sidebar__item {
+  margin: 2px 12px;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: #cfdfed;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.sidebar__link i {
+  width: 22px;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.sidebar__link:hover {
+  background-color: #2d4050;
+  color: white;
+}
+
+.sidebar__link.active {
+  background-color: #2c5a7a;
+  color: white;
+  font-weight: 500;
+  border-left: 3px solid #5dade2;
+}
+
+/* ---------- MAIN CONTENT (clean, minimal) ---------- */
+.main-content {
+  flex: 1;
+  background-color: #f9fafc;
+  padding: 28px 32px;
+  overflow-y: auto;
+}
+
+.content-header {
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.content-body {
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  line-height: 1.5;
+  color: #334155;
+}
+
+.content-body p {
+  margin-bottom: 16px;
+}
+
+.content-body a {
+  color: #2c7cb6;
+  text-decoration: none;
+}
+
+.content-body a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #e9edf2;
+}
+
+/* ---------- RESPONSIVE (sidebar toggle on mobile) ---------- */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    transition: transform 0.25s ease;
+    transform: translateX(0);
+  }
+  .sidebar--collapsed {
+    transform: translateX(-100%);
+    visibility: visible;
+    width: 260px;
+  }
+  .top-bar__brand {
+    font-size: 1rem;
+  }
+  .main-content {
+    padding: 20px 16px;
+  }
+}
+/* ---------- USER DROPDOWN (for logged-in user) ---------- */
+.user-area {
+  position: relative;
+}
+
+.user-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  padding: 6px 12px;
+  border-radius: 24px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.user-dropdown__trigger:hover {
+  background-color: #eef2f5;
+}
+
+.user-dropdown__menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  min-width: 140px;
+  margin-top: 8px;
+  display: none;
+  z-index: 1000;
+  list-style: none;
+  padding: 8px 0;
+}
+
+.user-dropdown__menu.show {
+  display: block;
+}
+
+.user-dropdown__menu li a,
+.user-dropdown__menu li button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  color: #1e293b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.user-dropdown__menu li a:hover,
+.user-dropdown__menu li button:hover {
+  background-color: #f1f5f9;
+}
+
+/* Not logged in links */
+.auth-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.auth-links a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 6px 12px;
+  border-radius: 24px;
+  transition: background 0.2s;
+}
+
+.auth-links a:hover {
+  background-color: #eef2f5;
+}

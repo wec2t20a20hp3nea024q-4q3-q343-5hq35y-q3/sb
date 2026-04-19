@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Online Judge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
+    <!-- KaTeX CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
+    <script src="../account.js"></script>
+    <script>
+      if(!logged_on()){
+        window.location.replace("../login.html");
+      }
+    </script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-logo"><a href="../index.html" style="text-decoration: none; color: inherit;">Testing</a></div>
+        <nav class="header-nav">
+            <a href="../index.html">Feature 1</a>
+            <a href="../page1.html">Feature 2</a>
+            <a href="../page2.html">Feature 3</a>
+            <a href="#"></a>
+        </nav>
+        <div class="clock">
+            <span class="clock-time"></span>
+        </div>
+        <div class="header-tool" style="display: flex; gap: 1rem; align-items: center;">
+            <a href="../profile/index.html" style="color:#1e3a5f; text-decoration: none;"><span id="currentUserDisplay"></span></a>
+            <a href="#" id="logoutBtn" style="color:#ff4e4e; text-decoration: none;">Logout</a>
+        </div>
+    </header>
+
+    <div class="container" id="mainContainer">
+        <div class="quiz-header">
+            <h1>DSE Online Judge</h1>
+            <p>Optimized version</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar" id="filterBar">
+            <div class="filter-group">
+                <label>Subject</label>
+                <select id="subjectFilter">
+                    <option value="all">All Subjects</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Topic</label>
+                <select id="topicFilter" disabled>
+                    <option value="all">All Topics</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Source</label>
+                <select id="sourceFilter" disabled>
+                    <option value="all">All Sources</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Question Type</label>
+                <select id="typeFilter">
+                    <option value="all">All Types</option>
+                    <option value="mc">Multiple Choice (MC)</option>
+                    <option value="lq">Long Question (LQ)</option>
+                </select>
+            </div>
+            <div class="filter-group" style="flex: 2; min-width: 200px;">
+                <label>Search</label>
+                <input type="text" id="searchInput" placeholder="Search in questions...">
+            </div>
+            <div class="filter-group" style="display: flex; align-items: flex-end;">
+                <button id="backToTopBtn" class="btn-back-to-top">↑ Top</button>
+            </div>
+        </div>
+
+        <!-- Stats Bar (底部统计栏) -->
+        <div class="stats-bar" id="statsBar">
+            <div class="score-area">
+                <strong>Score:</strong> <span id="totalScoreDisplay">0</span> / <span id="maxScoreDisplay">0</span>
+            </div>
+            <div class="question-count-area">
+                <strong>Questions:</strong> <span id="questionCountDisplay">0</span> / <span id="totalQuestionCountDisplay">0</span>
+            </div>
+            <div class="font-size-control">
+                <button class="btn-font-size" id="fontDecreaseBtn">A-</button>
+                <span id="fontSizePercent" class="font-size-percent">100%</span>
+                <button class="btn-font-size" id="fontIncreaseBtn">A+</button>
+                <button class="btn-font-size" id="fontResetBtn">Reset</button>
+            </div>
+            <div class="tag-toggle-control">
+                <button id="toggleTagsBtn" class="btn-toggle-tags">🏷️ Hide Tags</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn-clear" id="clearAllBtn">Clear All</button>
+                <button class="btn-submit" id="submitAllBtn">Submit All</button>
+            </div>
+        </div>
+
+        <div id="questionsContainer" class="questions-container"></div>
+    </div>
+
+    <!-- 浮动控制按钮：始终可见，用于显示/隐藏筛选栏和底部统计栏 -->
+    <button id="floatingToggleBtn" class="floating-toggle-btn" title="显示/隐藏控制栏">🔧</button>
+
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

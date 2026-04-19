@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>滑动华容道 · Testing</title>
+    <!-- 引入主站样式和账号模块 -->
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="../../account.js"></script>
+    <script>
+        if (typeof logged_on === 'function' && !logged_on()) {
+            window.location.replace('../../login.html');
+        }
+    </script>
+</head>
+<body>
+    <!-- 统一头部（与主站完全一致） -->
+    <header class="main-header">
+        <div class="header-logo"><a href="../../index.html">Testing</a></div>
+        <nav class="header-nav">
+            <a href="../../index.html">Feature 1</a>
+            <a href="../../page1.html">Feature 2</a>
+            <a href="../../page2.html">Feature 3</a>
+            <a href="#"></a>
+        </nav>
+        <div class="clock">
+            <span class="clock-time"></span>
+        </div>
+        <div class="header-tool">
+            <span id="currentUserDisplay"></span>
+            <a href="#" id="logoutBtn">登出</a>
+        </div>
+    </header>
+
+    <!-- 游戏主要内容 -->
+    <div class="game-container">
+        <div class="game-card">
+            <div class="header">
+                <h1>滑动华容道</h1>
+                <p class="subtitle">WASD 移动空格 | 点击或滑动相邻方块</p>
+            </div>
+
+            <div class="toolbar">
+                <div class="size-control">
+                    <label>Grid size (2~10)</label>
+                    <input type="number" id="gridSize" min="2" max="10" value="4" step="1">
+                </div>
+                <button id="randomBtn" class="btn primary">随机打乱</button>
+                <button id="resetBtn" class="btn secondary">复原顺序</button>
+                <div class="step-box">
+                    <span>步数</span>
+                    <strong id="stepCount">0</strong>
+                </div>
+            </div>
+
+            <div id="puzzleGrid" class="puzzle-grid"></div>
+
+            <div id="victoryToast" class="victory-toast hidden">🎉 胜利！ 🎉</div>
+            <div class="hint">💡 提示：使用键盘 W A S D 移动空格（上左下右）</div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+        // 时钟与用户显示（复用主站逻辑）
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const clockSpan = document.querySelector('.clock-time');
+            if (clockSpan) clockSpan.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        function displayCurrentUser() {
+            let username = null;
+            if (typeof get_cur_user === 'function') username = get_cur_user();
+            else if (typeof getCurrentUser === 'function') username = getCurrentUser();
+            else username = localStorage.getItem('currentUser');
+            const userSpan = document.getElementById('currentUserDisplay');
+            if (userSpan) userSpan.textContent = username || '访客';
+        }
+        displayCurrentUser();
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (typeof logout === 'function') logout();
+                window.location.href = '../../login.html';
+            });
+        }
+    </script>
+</body>
+</html>
